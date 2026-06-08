@@ -111,6 +111,7 @@ public class main {
 			mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 			mapper.enable(SerializationFeature.INDENT_OUTPUT);
 			mapper.registerModule(new JavaTimeModule());
+			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 			
 			HttpClient client = HttpClient.newHttpClient();
 			
@@ -128,7 +129,7 @@ public class main {
 				String json = response.body();
 				Show series1 = mapper.readValue(json, Show.class);
 				System.out.println(series1.sla());
-				jsonArquivo.setSeries(series1);
+				jsonArquivo.setSeries1(series1);
 				String jsonArchive = mapper.writeValueAsString(jsonArquivo);
 				Files.writeString(caminhoArquivo, jsonArchive);
 			}
@@ -155,7 +156,7 @@ public class main {
 		mapper.registerModule(new JavaTimeModule());
 		try {
 			FileReader reader = new FileReader(caminho + arquivo);
-			Arquivo jsonArquivo = mapper.readValue(reader, Arquivo.class);
+			jsonArquivo = mapper.readValue(reader, Arquivo.class);
 			System.out.println(jsonArquivo.resumo());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

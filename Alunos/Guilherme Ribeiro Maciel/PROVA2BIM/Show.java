@@ -15,12 +15,12 @@ public class Show {
 	public String name;
 	public String language;
 	public ArrayList<String> genres = new ArrayList<>();
-	public ArrayList<Rating> rating = new ArrayList<>();
+	public Rating rating;
 	public String status;
 	public LocalDate premiered;
 	public LocalDate ended;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	public ArrayList<Network> network = new ArrayList<>();
+	public Network network;
 
 	public Show() {
 		
@@ -74,19 +74,19 @@ public class Show {
 		this.ended = ended;
 	}
 
-	public ArrayList<Rating> getRating() {
+	public Rating getRating() {
 		return rating;
 	}
 
-	public void setRating(ArrayList<Rating> rating) {
+	public void setRating(Rating rating) {
 		this.rating = rating;
 	}
 
-	public ArrayList<Network> getNetwork() {
+	public Network getNetwork() {
 		return network;
 	}
 
-	public void setNetwork(ArrayList<Network> network) {
+	public void setNetwork(Network network) {
 		this.network = network;
 	}
 
@@ -100,14 +100,14 @@ public class Show {
 	
 	public String Emissora() {
 		if(getNetwork()!=null) {
-			return getNetwork().get(0).getEmissora().toString();
+			return getNetwork().getEmissora().toString();
 		} else {
 			return "não televisionado";
 		}
 	}
 	
 	public String sla() {
-		return "Nome: " + getName() + ", Idioma: " + getLanguage() + ", Genero: " + getGenres() + ", Avaliação: " + getRating().get(0).getAverage() 
+		return "Nome: " + getName() + ", Idioma: " + getLanguage() + ", Genero: " + getGenres() + ", Avaliação: " + getRating().getAverage() 
 				+ ", Status: " + getStatus() + ", Data de Estreia: " + getPremiered() + ", Data de Encerramento:" + getEnded() + ", Emissora: " + Emissora();
 	}
 }
